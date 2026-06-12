@@ -1,0 +1,36 @@
+@use 'variables' as *;
+@use 'reset';
+
+body {
+  font-family: $font-sans;
+  background-color: $color-bg;
+  color: $color-text;
+  font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+::placeholder {
+  color: $color-text-muted;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -10,6 +10,7 @@ interface TypeaheadProps {
   max?: number
   placeholder?: string
   id?: string
+  name?: string
   hasError?: boolean
 }
 
@@ -22,6 +23,7 @@ export function Typeahead({
   max = 20,
   placeholder,
   id,
+  name,
   hasError = false,
 }: TypeaheadProps) {
   const [query, setQuery] = useState('')
@@ -103,6 +105,7 @@ export function Typeahead({
         ))}
         <input
           ref={inputRef}
+          name={name}
           role="combobox"
           aria-expanded={open && filtered.length > 0}
           aria-controls={listboxId}

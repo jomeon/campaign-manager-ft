@@ -33,6 +33,8 @@ export function CampaignFilters({
         <Search size={18} className={styles.searchIcon} aria-hidden="true" />
         <input
           type="search"
+          id="campaign-search"
+          name="search"
           className={styles.search}
           placeholder="Search by name or keyword…"
           value={search}

@@ -96,6 +96,7 @@ export function CampaignForm({
               suggestions={KEYWORD_SUGGESTIONS}
               max={MAX_KEYWORDS}
               placeholder="e.g. shoes, running, sale"
+              name="keywords"
               hasError={!!fieldState.error}
             />
           )}

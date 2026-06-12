@@ -1,0 +1,136 @@
+@use '../../../styles/variables' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $color-border;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: $spacing-md $spacing-lg;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.brandText {
+  min-width: 0;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background: $color-primary;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: $color-text-muted;
+
+  display: none;
+  @include md {
+    display: block;
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.balance {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 6px $spacing-md;
+  background: $color-success-soft;
+  border: 1px solid rgba($color-success, 0.25);
+  border-radius: $radius-md;
+}
+
+.gem {
+  color: $color-success;
+}
+
+.balanceText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.balanceLabel {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $color-text-muted;
+
+  display: none;
+  @include md {
+    display: block;
+  }
+}
+
+.balanceValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: $color-success;
+  animation: pop 0.3s ease;
+}
+
+.btnLabel {
+  display: none;
+  @include md {
+    display: inline;
+  }
+}
+
+.right .newBtn {
+  flex-shrink: 0;
+}
+
+@media (max-width: #{$bp-md - 1px}) {
+  .right .newBtn {
+    width: 42px;
+    padding: 0;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1.12);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

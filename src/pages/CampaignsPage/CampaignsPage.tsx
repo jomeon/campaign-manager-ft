@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Plus } from 'lucide-react'
 import { Layout } from '../../components/layout/Layout/Layout'
 import {
@@ -11,6 +11,7 @@ import { Modal } from '../../components/ui/Modal/Modal'
 import { ConfirmDialog } from '../../components/ui/ConfirmDialog/ConfirmDialog'
 import { EmptyState } from '../../components/ui/EmptyState/EmptyState'
 import { Button } from '../../components/ui/Button/Button'
+import { Pagination } from '../../components/ui/Pagination/Pagination'
 import {
   useCampaigns,
   useCreateCampaign,
@@ -23,6 +24,8 @@ import { useDebouncedValue } from '../../hooks/useDebouncedValue'
 import { formatPLN } from '../../utils/format'
 import type { Campaign, CampaignInput } from '../../types/campaign'
 import styles from './CampaignsPage.module.scss'
+
+const PAGE_SIZE = 12
 
 export function CampaignsPage() {
   const { data: campaigns = [], isLoading, isError, refetch } = useCampaigns()
@@ -51,6 +54,26 @@ export function CampaignsPage() {
       return matchesStatus && matchesSearch
     })
   }, [campaigns, debouncedSearch, statusFilter])
+
+  const [page, setPage] = useState(1)
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const paged = useMemo(
+    () => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+    [filtered, page]
+  )
+
+  useEffect(() => {
+    setPage(1)
+  }, [debouncedSearch, statusFilter])
+
+  useEffect(() => {
+    if (page > pageCount) setPage(pageCount)
+  }, [page, pageCount])
+
+  const handlePageChange = useCallback((next: number) => {
+    setPage(next)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   const openCreate = useCallback(() => {
     setEditing(null)
@@ -144,12 +167,16 @@ export function CampaignsPage() {
           />
         ) : (
           <CampaignList
-            campaigns={filtered}
+            campaigns={paged}
             isLoading={isLoading}
             onEdit={openEdit}
             onDelete={requestDelete}
             onToggleStatus={handleToggle}
           />
+        )}
+
+        {!isLoading && !isError && pageCount > 1 && (
+          <Pagination page={page} pageCount={pageCount} onPageChange={handlePageChange} />
         )}
       </div>
 

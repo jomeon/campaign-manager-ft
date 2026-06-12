@@ -1,7 +1,7 @@
 import type { Campaign, CampaignInput } from '../types/campaign'
 import { SEED_CAMPAIGNS } from '../constants/seedCampaigns'
 
-const STORAGE_KEY = 'campaign-manager:campaigns'
+const STORAGE_KEY = 'campaign-manager:campaigns:v2'
 const LATENCY_MS = 250
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))

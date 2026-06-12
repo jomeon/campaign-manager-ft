@@ -1,0 +1,15 @@
+@use '../../styles/variables' as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin-bottom: $spacing-lg;
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: 700;
+}

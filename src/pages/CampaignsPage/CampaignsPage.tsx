@@ -19,6 +19,7 @@ import {
   useToggleStatus,
 } from '../../hooks/useCampaigns'
 import { useEmeraldBalance } from '../../hooks/useEmeraldBalance'
+import { useDebouncedValue } from '../../hooks/useDebouncedValue'
 import { formatPLN } from '../../utils/format'
 import type { Campaign, CampaignInput } from '../../types/campaign'
 import styles from './CampaignsPage.module.scss'
@@ -37,8 +38,10 @@ export function CampaignsPage() {
   const [editing, setEditing] = useState<Campaign | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Campaign | null>(null)
 
+  const debouncedSearch = useDebouncedValue(search, 250)
+
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase()
+    const q = debouncedSearch.trim().toLowerCase()
     return campaigns.filter((c) => {
       const matchesStatus = statusFilter === 'all' || c.status === statusFilter
       const matchesSearch =
@@ -47,7 +50,7 @@ export function CampaignsPage() {
         c.keywords.some((k) => k.toLowerCase().includes(q))
       return matchesStatus && matchesSearch
     })
-  }, [campaigns, search, statusFilter])
+  }, [campaigns, debouncedSearch, statusFilter])
 
   const openCreate = useCallback(() => {
     setEditing(null)

@@ -1,0 +1,34 @@
+@use '../../../styles/variables' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: $radius-pill;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.success {
+  background: $color-success-soft;
+  color: $color-success;
+}
+
+.muted {
+  background: $color-bg;
+  color: $color-text-muted;
+}
+
+.primary {
+  background: $color-primary-soft;
+  color: $color-primary;
+}

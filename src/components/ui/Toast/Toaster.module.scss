@@ -1,0 +1,78 @@
+@use '../../../styles/variables' as *;
+
+.region {
+  position: fixed;
+  z-index: $z-toast;
+  bottom: $spacing-lg;
+  right: $spacing-lg;
+  left: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  pointer-events: none;
+
+  @include md {
+    left: auto;
+    width: 360px;
+  }
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-left-width: 4px;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card-hover;
+  animation: toastIn 0.2s ease;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.message {
+  flex: 1;
+  font-size: 14px;
+}
+
+.dismiss {
+  display: inline-flex;
+  color: $color-text-muted;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.success {
+  border-left-color: $color-success;
+  .icon {
+    color: $color-success;
+  }
+}
+
+.error {
+  border-left-color: $color-danger;
+  .icon {
+    color: $color-danger;
+  }
+}
+
+.info {
+  border-left-color: $color-primary;
+  .icon {
+    color: $color-primary;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+import { Search, Loader2 } from 'lucide-react'
 import { cx } from '../../../utils/cx'
 import styles from './CampaignFilters.module.scss'
 
@@ -11,6 +11,7 @@ interface CampaignFiltersProps {
   onStatusFilterChange: (value: StatusFilter) => void
   total: number
   shown: number
+  searching?: boolean
 }
 
 const FILTERS: { value: StatusFilter; label: string }[] = [
@@ -26,6 +27,7 @@ export function CampaignFilters({
   onStatusFilterChange,
   total,
   shown,
+  searching = false,
 }: CampaignFiltersProps) {
   return (
     <div className={styles.bar}>
@@ -41,6 +43,7 @@ export function CampaignFilters({
           onChange={(e) => onSearchChange(e.target.value)}
           aria-label="Search campaigns"
         />
+        {searching && <Loader2 size={16} className={styles.spinner} aria-label="Searching" />}
       </div>
 
       <div className={styles.segment} role="group" aria-label="Filter by status">

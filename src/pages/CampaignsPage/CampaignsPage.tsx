@@ -117,6 +117,7 @@ export function CampaignsPage() {
             onStatusFilterChange={setStatusFilter}
             total={campaigns.length}
             shown={filtered.length}
+            searching={search !== debouncedSearch}
           />
         )}
 

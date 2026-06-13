@@ -1,4 +1,4 @@
-import { KeyboardEvent, useId, useMemo, useRef, useState } from 'react'
+import { KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { X } from 'lucide-react'
 import { cx } from '../../../utils/cx'
 import styles from './Typeahead.module.scss'
@@ -86,6 +86,11 @@ export function Typeahead({
         break
     }
   }
+
+  useEffect(() => {
+    if (!open || activeIndex < 0) return
+    document.getElementById(`${baseId}-opt-${activeIndex}`)?.scrollIntoView({ block: 'nearest' })
+  }, [activeIndex, open, baseId])
 
   return (
     <div className={styles.root}>
